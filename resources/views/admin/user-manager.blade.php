@@ -14,15 +14,20 @@
                 <div class="panel-heading">
                     All User
                 </div>
+
+                @include('layouts.errors')
+                @include('layouts.success')
+
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <table class="table table-striped table-bordered table-hover table-responsive" id="dataTables-example">
                         <thead>
                             <tr>
                                 <th>User ID</th>
                                 <th>User Name</th>
                                 <th>Email</th>
-                                <th>Avatar</th>
+                                <th>Users Follower</th>
+                                <th>Users Followed</th>
                                 <th>Role</th>
                                 <th>Created At</th>
                                 <th>Edit</th>
@@ -33,29 +38,22 @@
                             @foreach ($users as $key => $user)
                             <tr class="odd gradeX">
                                 <td>{{ $user->id }}</td>
-                                <td><a href="{{ URL('users/' . $user->id) }} ">{{ $user->name }}</a></td>
-                                <td>{{ $user->email }}</td>
-                                <td>
-                                    @if ($user->avatar)
-                                        <img src="{{ URL('' . $user->avatar) }}" alt="">
-                                    @endif
-                                    <img src="http://www.yxineff.com/wp-content/uploads/2014/11/default-avatar.png" alt="" width="5%">
-                                </td>
+                                <td><a href="{{ URL('admin/users/' . $user->id) }} ">{{ $user->name }}</a></td>
+                                <td>{{ $user->email }}</td>                      
+                                <td>Number</td>
+                                <td>Number</td>
                                 <th>
-                                    @if ($user->role == 1) <p>User</p>
-                                    @else <p>Admin</p>
+                                    @if ($user->role == 1) User
+                                    @else Admin
                                     @endif
                                 </th>
-                                <td class="center">{{ $user->created_at }}</td>
+                                <td>{{ $user->created_at }}</td>
                                 <th>
-                                    {!! link_to_route('users.edit', trans('admin/users.edit'), [$user->id], ['class' => 'btn btn-primary btn-block']) !!}                           
+                                    {!! link_to_route('users.edit', trans('admin/users.edit'), [$user->id], ['class' => 'btn btn-primary']) !!}                           
                                 </th>
-                                <th>
-                                    {!! Form::open([
-                                        'method' => 'delete',
-                                        'route' => ['users.destroy', $user->id]
-                                    ]) !!}
-                                    {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+                                <th>                                    
+                                    {!! Form::open(['method' => 'delete', 'route' => ['users.destroy', $user->id] ]) !!}
+                                        {{ Form::button(trans('admin/users.delete'), ['type' => 'submit', 'class' => 'btn btn-danger', 'onclick' => "return confirm('Really delete this user ?')"]) }}                     
                                     {{ Form::close() }}                                    
                                 </th>
                             </tr>

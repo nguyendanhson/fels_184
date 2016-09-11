@@ -16,7 +16,7 @@ class UserManagerController extends Controller
      */
     public function index()
     {
-        $users = User::orderby('id', 'desc')->paginate(config('paginate.user.normal'));
+        $users = User::orderby('name')->paginate(config('paginate.user.normal'));
         return view('admin.user-manager', ['users' => $users]);
     }
 
@@ -49,7 +49,15 @@ class UserManagerController extends Controller
      */
     public function show($id)
     {
-        //
+        // $currentUser = Auth::user();
+        // $user = User::findOrFail($id);
+        // $activity = Activity::where('user_id', $user->id)
+        //     ->orderBy('created_at', 'desc')
+        //     ->paginate(config('fels.activity_paginate'));
+
+        // return view('user.show', compact('user', 'currentUser', 'activity'));
+        $user = User::find($id);
+        return view('admin.user-profile', compact('user'));
     }
 
     /**
@@ -83,6 +91,13 @@ class UserManagerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+
+        if ($user->delete()) {
+            return redirect()->action('UserManagerController@index')->withSuccess(trans('admin/users.user_delete_success'));
+        }
+
+        return redirect()->back()
+            ->withErrors(trans('admin/users.user_delete_fail'));
     }
 }

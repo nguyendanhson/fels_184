@@ -191,6 +191,30 @@
                             <!-- /.nav-second-level -->
                         </li>
 
+                        <li>
+                            <a href="#"><i class="fa fa-check-square-o fa-fw"></i> Manage Answers<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ URL('admin/answers') }}">All Answers</a>
+                                </li>
+                                <li>
+                                    <a href="{{ URL('admin/answers/create') }}">Create Answers</a>
+                                </li>
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-bullhorn fa-fw"></i> Manage Activities<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ URL('admin/answers') }}">All Activities</a>
+                                </li>                                
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -203,6 +227,13 @@
 
     </div>
     <!-- /#wrapper -->
+
+    <script>
+        function warningFunction() {
+            alert("Really delete this user?");
+        }
+    </script>
+
     
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
